@@ -54,9 +54,10 @@ https://github.com/Pythagora-io/gpt-pilot/assets/10895136/0495631b-511e-451b-93d
 
 # 🔌 Requirements
 
-- **Python 3.9-3.11** (3.12 is currently not working due to a [dependency issue](https://github.com/psycopg/psycopg2/issues/1628)
+
+- **Python 3.9-3.12**
 - **PostgreSQL** (optional, projects default is SQLite)
-   - DB is needed for multiple reasons like continuing app development. If you have to stop at any point or the app crashes, go back to a specific step so that you can change some later steps in development, and easier debugging, in future we will add functionality to update project (change some things in existing project or add new features to the project and so on)...
+   - DB is needed for multiple reasons like continuing app development. If you have to stop at any point or the app crashes, go back to a specific step so that you can change some later steps in development, and easier debugging, in future we will add functionality to update project (change some things in existing project or add new features to the project and so on..)
 
 
 # 🚦How to start using gpt-pilot?
@@ -67,10 +68,10 @@ After you have Python and (optionally) PostgreSQL installed, follow these steps:
 4. `source pilot-env/bin/activate` (or on Windows `pilot-env\Scripts\activate`) (activate the virtual environment)
 5. `pip install -r requirements.txt` (install the dependencies)
 6. `cd pilot`
-7. `mv .env.example .env` (create the .env file)
+7. `mv .env.example .env` (or on Windows `copy .env.example .env`) (create the .env file)
 8. Add your environment to the `.env` file:
    - LLM Provider (OpenAI/Azure/Openrouter)
-   - your API key
+   - Your API key
    - database settings: SQLite/PostgreSQL (to change from SQLite to PostgreSQL, just set `DATABASE_TYPE=postgres`)
    - optionally set IGNORE_FOLDERS for the folders which shouldn't be tracked by GPT Pilot in workspace, useful to ignore folders created by compilers (i.e. `IGNORE_FOLDERS=folder1,folder2,folder3`)
 9. `python db_init.py` (initialize the database)
@@ -262,6 +263,9 @@ Since this is a research project, there are many areas that need to be researche
 
 ## 🖥 Development
 Other than the research, GPT Pilot needs to be debugged to work in different scenarios. For example, we realized that the quality of the code generated is very sensitive to the size of the development task. When the task is too broad, the code has too many bugs that are hard to fix, but when the development task is too narrow, GPT also seems to struggle in getting the task implemented into the existing code.
+
+## 📊 Telemetry
+To improve GPT Pilot, we are tracking some events from which you can opt out at any time. You can read more about it [here](./docs/TELEMETRY.md).
 
 # 🔗 Connect with us
 🌟 As an open-source tool, it would mean the world to us if you starred the GPT-pilot repo 🌟

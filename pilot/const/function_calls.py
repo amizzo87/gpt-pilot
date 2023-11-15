@@ -187,14 +187,10 @@ IMPLEMENT_TASK = {
                             'properties': {
                                 'type': {
                                     'type': 'string',
-                                    'enum': ['command', 'kill_process', 'code_change', 'human_intervention'],
+                                    'enum': ['command', 'code_change', 'human_intervention'],
                                     'description': 'Type of the development step that needs to be done to complete the entire task.',
                                 },
                                 'command': command_definition(),
-                                'kill_process': {
-                                    'type': 'string',
-                                    'description': 'To kill a process that was left running by a previous `command` step provide the `command_id` in this field and set `type` to "kill_process".',
-                                },
                                 'code_change': {
                                     'type': 'object',
                                     'description': 'A code change that needs to be implemented. This should be used only if the task is of a type "code_change".',
@@ -209,7 +205,7 @@ IMPLEMENT_TASK = {
                                         },
                                         'content': {
                                             'type': 'string',
-                                            'description': 'Full content of the file that needs to be implemented.',
+                                            'description': 'Full content of the file that needs to be implemented. It is mandatory that no parts of file content are skipped or assumed to be there. It must be full content.',
                                         },
                                     },
                                     'required': ['name', 'path', 'content'],
@@ -381,7 +377,7 @@ DEVELOPMENT_PLAN = {
                             },
                             'programmatic_goal': {
                                 'type': 'string',
-                                'description': 'programmatic goal that will determine if a task can be marked as done from a programmatic perspective (this will result in an automated test that is run before the task is sent to you for a review)',
+                                'description': 'Detailed description of programmatic goal. Programmatic goal that will determine if a task can be marked as done from a programmatic perspective (this will result in an automated test that is run before the task is sent to you for a review). All details previously specified by user that are important for this task must be included in this programmatic goal.',
                             },
                             'user_review_goal': {
                                 'type': 'string',
@@ -469,7 +465,7 @@ IMPLEMENT_CHANGES = {
                             },
                             'content': {
                                 'type': 'string',
-                                'description': 'Full content of the file that needs to be saved on the disk.',
+                                'description': 'Full content of the file that needs to be saved on the disk. It is mandatory that no parts of file content are skipped or assumed to be there. It must be full content.',
                             },
                             'description': {
                                 'type': 'string',
@@ -546,14 +542,10 @@ DEBUG_STEPS_BREAKDOWN = {
                             'properties': {
                                 'type': {
                                     'type': 'string',
-                                    'enum': ['command', 'kill_process', 'code_change', 'human_intervention'],
+                                    'enum': ['command', 'code_change', 'human_intervention'],
                                     'description': 'Type of the step that needs to be done to debug this issue.',
                                 },
                                 'command': command_definition('Command that needs to be run to debug this issue.', 'Timeout in milliseconds that represent the approximate time this command takes to finish. If you need to run a command that doesn\'t finish by itself (eg. a command to run an app), put the timeout to 3000 milliseconds.'),
-                                'kill_process': {
-                                    'type': 'string',
-                                    'description': 'To kill a process that was left running by a previous `command` step provide the `command_id` in this field and set `type` to "kill_process".',
-                                },
                                 'code_change_description': {
                                     'type': 'string',
                                     'description': 'Description of a step in debugging this issue when there are code changes required. This should be used only if the task is of a type "code_change" and it should thoroughly describe what needs to be done to implement the code change for a single file - it cannot include changes for multiple files.',
